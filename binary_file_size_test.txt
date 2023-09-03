@@ -1,0 +1,120 @@
+Input is from https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/size.html#reducing-overall-size
+
+1. Before any size reduction principles.
+
+Total sizes:
+Used static DRAM:   10816 bytes ( 169920 remain, 6.0% used)
+      .data size:    8536 bytes
+      .bss  size:    2280 bytes
+Used static IRAM:   49310 bytes (  81762 remain, 37.6% used)
+      .text size:   48283 bytes
+   .vectors size:    1027 bytes
+Used Flash size :  125055 bytes
+           .text:   85247 bytes
+         .rodata:   39552 bytes
+Total image size:  182901 bytes (.bin may be padded larger)
+
+
+2. Remove printf
+Total sizes:
+Used static DRAM:   10816 bytes ( 169920 remain, 6.0% used)
+      .data size:    8536 bytes
+      .bss  size:    2280 bytes
+Used static IRAM:   49310 bytes (  81762 remain, 37.6% used)
+      .text size:   48283 bytes
+   .vectors size:    1027 bytes
+Used Flash size :  124671 bytes
+           .text:   84967 bytes
+         .rodata:   39448 bytes
+Total image size:  182517 bytes (.bin may be padded larger)
+
+3. Optimize for size
+Total sizes:
+Used static DRAM:   10444 bytes ( 170292 remain, 5.8% used)
+      .data size:    8172 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   43922 bytes (  87150 remain, 33.5% used)
+      .text size:   42895 bytes
+   .vectors size:    1027 bytes
+Used Flash size :  116323 bytes
+           .text:   78879 bytes
+         .rodata:   37188 bytes
+Total image size:  168417 bytes (.bin may be padded larger)
+
+4.Reduce the compiled-in log output by lowering the app CONFIG_LOG_DEFAULT_LEVEL
+   Default same.
+
+5.Set the CONFIG_COMPILER_OPTIMIZATION_ASSERTION_LEVEL to Silent
+6.silent the assertion for the HAL component separately by setting CONFIG_HAL_DEFAULT_ASSERTION_LEVEL
+
+Total sizes:
+Used static DRAM:    9336 bytes ( 171400 remain, 5.2% used)
+      .data size:    7064 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   40922 bytes (  90150 remain, 31.2% used)
+      .text size:   39895 bytes
+   .vectors size:    1027 bytes
+Used Flash size :   94831 bytes
+           .text:   77771 bytes
+         .rodata:   16804 bytes
+Total image size:  142817 bytes (.bin may be padded larger)
+
+7.Setting CONFIG_COMPILER_OPTIMIZATION_CHECKS_SILENT
+8.Do not enable CONFIG_COMPILER_CXX_EXCEPTIONS, CONFIG_COMPILER_CXX_RTTI, or set the CONFIG_COMPILER_STACK_CHECK_MODE to Overall.
+  default disable.
+
+Total sizes:
+Used static DRAM:    9336 bytes ( 171400 remain, 5.2% used)
+      .data size:    7064 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   40922 bytes (  90150 remain, 31.2% used)
+      .text size:   39895 bytes
+   .vectors size:    1027 bytes
+Used Flash size :   89187 bytes
+           .text:   75055 bytes
+         .rodata:   13876 bytes
+Total image size:  137173 bytes (.bin may be padded larger)
+
+9.Disabling CONFIG_ESP_ERR_TO_NAME_LOOKUP
+Total sizes:
+Used static DRAM:    9336 bytes ( 171400 remain, 5.2% used)
+      .data size:    7064 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   40922 bytes (  90150 remain, 31.2% used)
+      .text size:   39895 bytes
+   .vectors size:    1027 bytes
+Used Flash size :   89187 bytes
+           .text:   75055 bytes
+         .rodata:   13876 bytes
+Total image size:  137173 bytes (.bin may be padded larger)
+
+10.Setting CONFIG_ESP_SYSTEM_PANIC to Silent reboot
+11. can be disabled through CONFIG_ESP_PROTOCOMM_SUPPORT_SECURITY_VERSION_0
+
+Total sizes:
+Used static DRAM:    9336 bytes ( 171400 remain, 5.2% used)
+      .data size:    7064 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   40906 bytes (  90166 remain, 31.2% used)
+      .text size:   39879 bytes
+   .vectors size:    1027 bytes
+Used Flash size :   87595 bytes
+           .text:   74167 bytes
+         .rodata:   13172 bytes
+Total image size:  135565 bytes (.bin may be padded larger)
+
+12. Disabling CONFIG_ESP_WIFI_ENABLE_WPA3_SAE
+    Disabling CONFIG_ESP_WIFI_SOFTAP_SUPPORT
+no reduction
+Total sizes:
+Used static DRAM:    9336 bytes ( 171400 remain, 5.2% used)
+      .data size:    7064 bytes
+      .bss  size:    2272 bytes
+Used static IRAM:   40906 bytes (  90166 remain, 31.2% used)
+      .text size:   39879 bytes
+   .vectors size:    1027 bytes
+Used Flash size :   87595 bytes
+           .text:   74167 bytes
+         .rodata:   13172 bytes
+Total image size:  135565 bytes (.bin may be padded larger)
+
