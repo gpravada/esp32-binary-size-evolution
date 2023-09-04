@@ -40,7 +40,6 @@ jobs:
           cp build/bootloader/bootloader.bin bootloader-${{ matrix.idf_ver }}.bin
           cp build/partition_table/partition-table.bin partition-table-${{ matrix.idf_ver }}.bin
           cp build/rgb-led.bin rgb-led-${{ matrix.idf_ver }}.bin
-          cp build/ota_data_initial.bin ota_data_initial-${{ matrix.idf_ver }}.bin
 
       - name: Upload
         uses: actions/upload-artifact@v3
