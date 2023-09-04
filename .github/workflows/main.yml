@@ -36,16 +36,16 @@ jobs:
           target: ${{ matrix.idf_target }}
       - name: Rename artifact
         run: |
-          ls -lah 
+          ls -lah
           cp build/bootloader/bootloader.bin bootloader-${{ matrix.idf_ver }}.bin
           cp build/partition_table/partition-table.bin partition-table-${{ matrix.idf_ver }}.bin
-          cp build/rgb_led.bin rgb_led-${{ matrix.idf_ver }}.bin
+          cp build/rgb-led.bin rgb-led-${{ matrix.idf_ver }}.bin
           cp build/ota_data_initial.bin ota_data_initial-${{ matrix.idf_ver }}.bin
 
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
-          name: rgb_led_${{ matrix.idf_target }}_${{ matrix.idf_ver }}
+          name: rgb-led_${{ matrix.idf_target }}_${{ matrix.idf_ver }}
           path: "*-${{ matrix.idf_ver }}.bin"
 
   release:
